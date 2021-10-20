@@ -17,6 +17,10 @@ router.post(
   controllerWrapper(ctrl.signup)
 );
 
+router.post("/verify", controllerWrapper(ctrl.resend));
+
+router.get("/verify/:verifyToken", controllerWrapper(ctrl.verify));
+
 router.post("/login", validation(userJoiSchema), controllerWrapper(ctrl.login));
 
 router.get("/logout", authenticate, controllerWrapper(ctrl.logout));
