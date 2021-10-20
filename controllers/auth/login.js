@@ -12,7 +12,10 @@ const login = async (req, res) => {
     throw new NotFound(`User with email ${email} not exist`);
   }
   if (!user.comparePassword(password)) {
-    throw new BadRequest("Ivalid password");
+    throw new BadRequest("Invalid password");
+  }
+  if (!user.verify) {
+    throw new BadRequest("Email not verified");
   }
 
   const { _id } = user;
@@ -23,7 +26,7 @@ const login = async (req, res) => {
   await User.findByIdAndUpdate(_id, { token });
   res.json({
     status: "success",
-    code: 200,
+    code: 201,
     data: {
       token,
     },
