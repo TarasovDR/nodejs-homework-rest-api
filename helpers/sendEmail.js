@@ -1,13 +1,13 @@
 const nodemailer = require("nodemailer");
 
-const { EMAIL_PASSWORD } = process.env;
+const { EMAIL_HOST, EMAIL_PASSWORD, EMAIL_SENDER } = process.env;
 
 const nodemailerConfig = {
-  host: "smtp.mail.ru",
+  host: EMAIL_HOST,
   port: 465,
   secure: true,
   auth: {
-    user: "denis_formula1@mail.ru",
+    user: EMAIL_SENDER,
     pass: EMAIL_PASSWORD,
   },
 };
@@ -15,7 +15,7 @@ const nodemailerConfig = {
 const transporter = nodemailer.createTransport(nodemailerConfig);
 
 const sendEmail = async (data) => {
-  const email = { ...data, from: "denis_formula1@mail.ru" };
+  const email = { ...data, from: EMAIL_SENDER };
   transporter.sendMail(email);
 };
 

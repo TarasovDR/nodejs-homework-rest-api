@@ -25,6 +25,8 @@ const resend = async (req, res) => {
     });
   }
 
+  const verifyEmailServer = "http://localhost:3000";
+
   const verifyEmail = {
     to: email,
     subject: "Please, verify your email",
@@ -32,7 +34,7 @@ const resend = async (req, res) => {
     <p><strong>Email клиента:</strong> ${email}</p>
     <p><strong>Телефон клиента:</strong> 8-066 555-55-55</p>
     <a 
-      href="http://localhost:3000/api/auth/verify/${verifyToken}" target="_blank">
+      href=${verifyEmailServer}/api/auth/verify/${user.verifyToken} target="_blank">
       Confirm email
     </a>`,
   };
